@@ -1,0 +1,20 @@
+<div class="{{ container_classes|join(' ') }}">
+    {% if tabs|length == 1 %}
+        {{ rabble_admin_ui(tabs|first) }}
+    {% elseif tabs|length > 0 %}
+        <ul class="nav nav-tabs" id="{{ name }}-tabs" role="tablist">
+            {% for tab in tabs %}
+                <li class="nav-item">
+                    <a class="nav-link{% if loop.first %} active{% endif %}" id="{{ name }}-tab{{ loop.index }}" data-toggle="tab" href="#{{ name }}-tab-content-{{ loop.index }}">{{ tab.label }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="tab-content" id="{{ name }}-tabs-content">
+            {% for tab in tabs %}
+                <div class="tab-pane fade{% if loop.first %} show active{% endif %}" id="{{ name }}-tab-content-{{ loop.index }}" aria-labelledby="{{ name }}-tab{{ loop.index }}">
+                    {{ rabble_admin_ui(tab) }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

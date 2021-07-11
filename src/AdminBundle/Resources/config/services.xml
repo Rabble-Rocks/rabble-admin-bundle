@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/controller.xml"/>
+        <import resource="services/command.xml"/>
+        <import resource="services/menu.xml"/>
+        <import resource="services/system_tray.xml"/>
+        <import resource="services/twig.xml"/>
+        <import resource="services/search.xml"/>
+    </imports>
+    <parameters>
+        <parameter key="rabble_admin.route_loader.class">Rabble\AdminBundle\Routing\AdminRouteLoader</parameter>
+        <parameter key="rabble_admin.routing_listener.class">Rabble\AdminBundle\Routing\RoutingListener</parameter>
+    </parameters>
+    <services>
+        <service id="rabble_admin.route_loader" class="%rabble_admin.route_loader.class%">
+            <argument type="service" id="event_dispatcher"/>
+            <tag name="routing.loader"/>
+        </service>
+        <service id="rabble_admin.routing_listener" class="%rabble_admin.routing_listener.class%">
+            <tag name="kernel.event_listener" event="rabble_admin.routing.load" method="onRoutingLoad"/>
+        </service>
+        <service id="rabble_admin.router_context_subscriber"
+                 class="Rabble\AdminBundle\EventListener\RouterContextSubscriber">
+            <argument>%kernel.default_locale%</argument>
+            <argument type="service" id="router.default"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="Rabble\UserBundle\Repository\UserRepository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <service id="rabble_admin.param_converter.implemented_entity"
+                 class="Rabble\AdminBundle\Request\ParamConverter\ImplementedEntityConverter">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <tag name="request.param_converter" converter="implemented_entity"/>
+        </service>
+        <service id="rabble_admin.builder.admin_builder" class="Rabble\AdminBundle\Builder\RabbleAdminBuilder">
+            <argument type="service" id="kernel"/>
+            <tag name="rabble_admin.admin_builder"/>
+        </service>
+    </services>
+</container>

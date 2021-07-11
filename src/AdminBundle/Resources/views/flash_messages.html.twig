@@ -1,0 +1,32 @@
+{% macro alerts(type, context, alertType) %}
+    {% set dismissible = context.dismissible is defined ? context.dismissible : true %}
+    {% set marginTop = context.mt is defined ? context.mt|round : 0 %}
+    {% set marginBottom = context.mb is defined ? context.mb|round : 0 %}
+    {% set translationDomain = context.translationDomain is defined ? context.translationDomain : 'flash_messages' %}
+    {% for message in app.session.flashBag.get(type) %}
+        <div class="alert alert-{{ alertType|default(type) }} {% if dismissible %}alert-dismissible fade show{% endif %} mb-{{ marginBottom }} mt-{{ marginTop }}"
+             role="alert">
+            {% if translationDomain is same as(false) %}
+                {{ message }}
+            {% else %}
+                {{ message|trans([], translationDomain) }}
+            {% endif %}
+            {% if dismissible %}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endmacro %}
+{% import _self as macro %}
+
+{{ macro.alerts('primary', _context) }}
+{{ macro.alerts('secondary', _context) }}
+{{ macro.alerts('success', _context) }}
+{{ macro.alerts('danger', _context) }}
+{{ macro.alerts('error', _context, 'danger') }}
+{{ macro.alerts('warning', _context) }}
+{{ macro.alerts('info', _context) }}
+{{ macro.alerts('light', _context) }}
+{{ macro.alerts('dark', _context) }}

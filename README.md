@@ -1,0 +1,1 @@
+rabble-admin-bundle

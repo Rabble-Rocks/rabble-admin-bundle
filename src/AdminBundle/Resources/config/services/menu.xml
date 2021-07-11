@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="rabble_admin.menu.configure_menu_listener.class">Rabble\AdminBundle\Menu\ConfigureMenuListener</parameter>
+        <parameter key="rabble_admin.menu.builder.class">Rabble\AdminBundle\Menu\AdminMenuBuilder</parameter>
+        <parameter key="rabble_admin.menu.routes_voter.class">Rabble\AdminBundle\Menu\Voter\RoutesVoter</parameter>
+        <parameter key="rabble_admin.menu.children_voter.class">Rabble\AdminBundle\Menu\Voter\ChildrenVoter</parameter>
+    </parameters>
+    <services>
+        <service id="rabble_admin.menu.builder" class="%rabble_admin.menu.builder.class%">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="knp_menu.factory"/>
+        </service>
+        <service id="rabble_admin.menu.side_menu" class="Knp\Menu\MenuItem">
+            <factory service="rabble_admin.menu.builder" method="buildSideMenu"/>
+            <argument type="service" id="request_stack"/>
+            <tag name="knp_menu.menu" alias="admin_sidemenu"/>
+        </service>
+        <service id="rabble_admin.menu.configure_menu_listener" class="%rabble_admin.menu.configure_menu_listener.class%">
+            <tag name="kernel.event_listener" event="rabble_admin.menu_configure" method="onMenuConfigure" priority="256"/>
+            <tag name="kernel.event_listener" event="rabble_admin.menu_configure" method="onLateMenuConfigure" priority="-256"/>
+        </service>
+        <service id="rabble_admin.menu.routes_voter" class="%rabble_admin.menu.routes_voter.class%">
+            <argument type="service" id="request_stack" />
+            <tag name="knp_menu.voter" />
+        </service>
+        <service id="rabble_admin.menu.children_voter" class="%rabble_admin.menu.children_voter.class%">
+            <argument type="service" id="knp_menu.matcher" />
+            <tag name="knp_menu.voter" />
+        </service>
+    </services>
+</container>

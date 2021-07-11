@@ -1,0 +1,44 @@
+{% extends '@KnpMenu/menu.html.twig' %}
+
+{% block label -%}
+    {%- set icon = item.extra('icon') -%}
+    {%- set icon_color = item.extra('icon_color') -%}
+    {%- if icon -%}
+        {%- if icon_color -%}
+            {%- if (icon_color matches '/\\-\\d{3}$/') is same as(0) -%}
+                {% set icon_color = icon_color ~ '-500' %}
+            {% endif %}
+            {% set icon = 'c-' ~ icon_color ~ ' ' ~ icon %}
+        {%- endif -%}
+        <span class="icon-holder"><i class="{{ icon }}"></i></span>
+    {%- endif -%}
+    <span class="title{% if matcher.isCurrent(item) %} font-weight-bold c-grey-800{% endif %}">{{ parent() }}</span>
+    {%- if item.hasChildren and item.displayChildren %}<span class="arrow"><i class="ti-angle-right"></i></span>{% endif %}
+{% endblock %}
+{% block item %}
+    {% set attributes = item.attributes %}
+    {% set uri = item.uri %}
+    {% set childAttributes = item.childrenAttributes %}
+    {% if item.hasChildren and item.displayChildren %}
+        {% set class = (item.attributes['class']|default ~ ' dropdown') %}
+        {% if matcher.isCurrent(item) %}{% set class = class ~ ' open' %}{% endif %}
+        {% set childClass = (item.attributes['class']|default ~ ' dropdown-menu')|trim %}
+        {% do item.setAttributes(attributes|merge({ 'class': class|trim })) %}
+        {% do item.setUri('javascript:void(0);') %}
+        {% do item.setChildrenAttributes(childAttributes|merge({ 'class': childClass })) %}
+    {% endif %}
+    {{ parent() }}
+    {% do item.setAttributes(attributes) %}
+    {% do item.setUri(uri) %}
+    {% do item.setChildrenAttributes(childAttributes) %}
+{% endblock %}
+{% block linkElement %}
+    {% set attributes = item.linkAttributes %}
+    {% set class = (item.linkAttributes['class']|default) %}
+    {% if item.hasChildren and item.displayChildren %}
+        {% set class = class ~ ' dropdown' %}
+    {% endif %}
+    {% do item.setLinkAttributes(item.linkAttributes|merge({ 'class': class|trim })) %}
+    {{ parent() }}
+    {% do item.setLinkAttributes(attributes) %}
+{% endblock %}

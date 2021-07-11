@@ -1,0 +1,112 @@
+{% trans_default_domain 'RabbleAdminBundle' %}
+{% block document %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        {% block head %}
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+            <link rel="icon" href="{{ asset('admin/build/assets/static/images/favicon.png') }}" type="image/png" />
+            <title>
+                {% block title %}{% endblock %}
+                {% if titleBrand|default %}
+                    | {{ titleBrand }}
+                {% endif %}
+            </title>
+            {% include '@RabbleAdmin/Layout/loader.html.twig' %}
+            {% block css %}
+                <link href="{{ asset('admin/build/style.css') }}" rel="stylesheet">
+                <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+            {% endblock %}
+        {% endblock %}
+    </head>
+    {% block body_outer %}
+        <body class="app">
+        <div id="loader"><div class="spinner"></div></div>
+        <script>
+            window.addEventListener("load", function load() {
+                const loader = document.getElementById("loader");
+                setTimeout(function () {
+                    loader.classList.add("fadeOut");
+                }, 100);
+            });
+        </script>
+        <div>
+            <div class="sidebar">
+                <div class="sidebar-inner">
+                    <div class="sidebar-logo">
+                        <div class="peers ai-c fxw-nw">
+                            <div class="peer peer-greed">
+                                <a class="sidebar-link td-n" href="{{ path('rabble_admin_dashboard') }}">
+                                    <div class="peers ai-c fxw-nw">
+                                        <div class="peer">
+                                            <div class="logo text-center"><img src="{{ asset('admin/build/assets/static/images/logo.png') }}" class="img-fluid my-2" style="max-width: 45px" alt="logo" /></div>
+                                        </div>
+                                        <div class="peer peer-greed"><h5 class="lh-1 mB-0 logo-text">{{ adminBrand|default('Rabble') }}</h5></div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="peer">
+                                <div class="mobile-toggle sidebar-toggle">
+                                    <a href="" class="td-n"><i class="ti-arrow-circle-left"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ knp_menu_render('admin_sidemenu', { template: '@RabbleAdmin/Layout/side_menu.html.twig', currentClass: 'active' }) }}
+                </div>
+            </div>
+            <div class="page-container">
+                <div class="header navbar">
+                    <div class="header-container">
+                        <form method="get" action="{{ path('rabble_admin_search') }}">
+                            <ul class="nav-left">
+                                {% block search %}
+                                    {% set openSearch = app.request.attributes.get('_route') is same as('rabble_admin_search') %}
+                                    <li>
+                                        <a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);"><i class="ti-menu"></i></a>
+                                    </li>
+                                    <li class="search-box{% if openSearch %} active{% endif %}">
+                                        <a class="search-toggle no-pdd-right" href="javascript:void(0);"><i class="search-icon ti-search pdd-right-10"></i> <i class="search-icon-close ti-close pdd-right-10"></i></a>
+                                    </li>
+                                    <li class="search-input{% if openSearch %} active{% endif %}"><input class="form-control" type="text" name="q"{% if openSearch %} value="{{ app.request.query.get('q') }}"{% endif %} placeholder="{{ 'search.input_placeholder'|trans }}" autocomplete="off" /></li>
+                                {% endblock %}
+                            </ul>
+                        </form>
+                        <ul class="nav-right">
+                            {% block system_tray %}{{ rabble_admin_system_tray() }}{% endblock %}
+                        </ul>
+                    </div>
+                </div>
+                <main class="main-content bgc-grey-100">
+                    <div id="mainContent">
+                        {% block page_content %}{% endblock %}
+                    </div>
+                </main>
+                <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
+                    <div>
+                        <span>
+                            {{ 'footer.copyright'|trans({'%year%': 'now'|date('Y')}) }}.
+                            {% if designer.name is defined %}
+                                {% set footerDesigner = designer.name %}
+                                {% if designer.url is defined %}
+                                    {%- set footerDesigner -%}
+                                        <a href="{{ designer.url }}" target="_blank" title="{{ designer.name }}">{{ designer.name }}</a>
+                                    {%- endset -%}
+                                {% endif %}
+                                {{ 'footer.designer'|trans({'%designer%': footerDesigner})|raw }}..
+                            {% endif %}
+                            {{ 'footer.rights'|trans }}.
+                        </span>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        </body>
+    {% endblock %}
+    </html>
+    {% block js %}
+        <script type="text/javascript" src="{{ asset('admin/build/vendor.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('admin/build/bundle.js') }}"></script>
+    {% endblock %}
+{% endblock %}

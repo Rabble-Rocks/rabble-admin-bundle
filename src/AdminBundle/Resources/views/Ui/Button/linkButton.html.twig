@@ -1,0 +1,5 @@
+<a href="{{ url }}"{% if 'class' not in attributes|keys %} class="btn btn-{{ button_style }}{% if button_size %}btn-{{ button_size }}{% endif %}"{% endif %}{% for attrName, attrValue in attributes %} {{ attrName }}="{{ attrValue }}"{% endfor %}>
+{%- if icon_left %}<i class="{{ icon_left }}"></i>{{ ' ' }}{% endif -%}
+{%- if is_label_html %}{{ label|raw }}{% else %}{{ label }}{% endif -%}
+{%- if icon_right %}{{ ' ' }}<i class="{{ icon_right }}"></i>{% endif -%}
+</a>

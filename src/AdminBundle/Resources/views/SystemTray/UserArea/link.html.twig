@@ -1,0 +1,10 @@
+<li>
+    {%- set url = route -%}
+    {%- if 1 > (route matches '/^\\/|https?:\\/\\//i') -%}
+        {% set url = path(route, routeParameters) %}
+    {%- endif -%}
+    <a href="{{ url }}"{% if target %} target="{{ target }}"{% endif %} class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+        {%- if icon %}<i class="{{ icon }} mR-10"></i>{% endif -%}
+        {{ label }}
+    </a>
+</li>

@@ -1,0 +1,7 @@
+{% if no_container %}
+    {{ content|raw }}
+{% else %}
+    <div{% if 'class' not in attributes|keys %} class="bgc-white border p-10 mB-20"{% endif %}{% for attrName, attrValue in attributes %} {{ attrName }}="{{ attrValue }}"{% endfor %}>
+        {{ content|raw }}
+    </div>
+{% endif %}

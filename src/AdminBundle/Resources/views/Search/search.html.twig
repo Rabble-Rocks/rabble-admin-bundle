@@ -1,0 +1,12 @@
+{% extends '@RabbleAdmin/Layout/base.html.twig' %}
+{% trans_default_domain 'RabbleAdminBundle' %}
+{% block title %}{{ 'search.heading'|trans }}{% endblock %}
+{% block page_content %}
+    <h4 class="c-grey-900 mT-10 mB-30">{{ 'search.heading'|trans }}</h4>
+    {% for result in results %}
+        {% include result.template|default('@RabbleAdmin/Search/result.html.twig') %}
+    {% endfor %}
+    {% if results|length == 0 %}
+        <p>{{ 'search.no_results'|trans }}</p>
+    {% endif %}
+{% endblock %}

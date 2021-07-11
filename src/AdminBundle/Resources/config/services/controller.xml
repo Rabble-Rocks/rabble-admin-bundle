@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="rabble_admin.controller.auth.class">Rabble\AdminBundle\Controller\AuthController</parameter>
+        <parameter key="rabble_admin.controller.dashboard.class">Rabble\AdminBundle\Controller\DashboardController</parameter>
+        <parameter key="rabble_admin.controller.search.class">Rabble\AdminBundle\Controller\SearchController</parameter>
+    </parameters>
+    <services>
+        <service id="rabble_admin.controller.auth" class="%rabble_admin.controller.auth.class%" autowire="true">
+            <argument type="service" id="security.firewall.map" />
+            <tag name="controller.service_arguments"/>
+        </service>
+        <service id="rabble_admin.controller.dashboard" class="%rabble_admin.controller.dashboard.class%" autowire="true">
+            <tag name="controller.service_arguments"/>
+        </service>
+        <service id="rabble_admin.controller.search" class="%rabble_admin.controller.search.class%" autowire="true">
+            <argument type="service" id="rabble_admin.search.search_manager" />
+            <tag name="controller.service_arguments"/>
+        </service>
+    </services>
+</container>

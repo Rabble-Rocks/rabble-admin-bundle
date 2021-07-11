@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing
+        http://symfony.com/schema/routing/routing-1.0.xsd">
+    <route id="rabble_admin_auth_login" controller="rabble_admin.controller.auth::loginAction" path="/login" />
+    <route id="rabble_admin_auth_logout" path="/logout" />
+    <route id="rabble_admin_dashboard" controller="rabble_admin.controller.dashboard::indexAction" path="/" />
+    <route id="rabble_admin_search" controller="rabble_admin.controller.search::searchAction" path="/search" />
+</routes>

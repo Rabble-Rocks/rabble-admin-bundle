@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="rabble_admin.system_tray.class">Rabble\AdminBundle\SystemTray\SystemTray</parameter>
+    </parameters>
+    <services>
+        <service id="rabble_admin.system_tray" class="%rabble_admin.system_tray.class%"/>
+        <service alias="rabble_admin.system_tray" id="Rabble\AdminBundle\SystemTray\SystemTrayInterface"/>
+        <service id="rabble_admin.system_tray_item" class="Rabble\AdminBundle\SystemTray\AbstractSystemTrayItem" abstract="true">
+            <argument type="service" id="twig" />
+        </service>
+
+        <service id="rabble_admin.system_tray.user_area" class="Rabble\AdminBundle\SystemTray\UserAreaTrayItem" parent="rabble_admin.system_tray_item">
+            <tag name="rabble_admin.system_tray_item"/>
+        </service>
+
+        <service id="Rabble\AdminBundle\EventListener\UserAreaListener">
+            <argument type="service" id="rabble_admin.system_tray.user_area"/>
+            <argument type="service" id="translator.default"/>
+            <tag name="kernel.event_listener" event="kernel.request" priority="256" method="onKernelRequest"/>
+        </service>
+
+        <service id="rabble_admin.system_tray.content_locale" class="Rabble\AdminBundle\SystemTray\ContentLocaleTrayItem" parent="rabble_admin.system_tray_item">
+            <argument type="service" key="$requestStack" id="request_stack" />
+            <argument key="$locales">%rabble_admin.locales%</argument>
+            <tag name="rabble_admin.system_tray_item"/>
+        </service>
+    </services>
+</container>

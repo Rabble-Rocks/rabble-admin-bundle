@@ -1,0 +1,24 @@
+auth.login:
+  title: Sign In
+  username_label: Username
+  username_placeholder: John Doe
+  password_label: Password
+  password_placeholder: Password
+  remember_me_label: Remember Me
+  button_label: Login
+menu:
+  dashboard: Dashboard
+  settings: Settings
+footer:
+  copyright: Copyright © %year%
+  rights: All rights reserved
+  designer: Designed by %designer%
+user_area:
+  logout: Logout
+search:
+  input_placeholder: Search...
+  heading: Search results
+  no_results: Your search query resulted in no results.
+  open_button: Show result
+  type:
+    menu_item: Menu item
