@@ -12,12 +12,12 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0"
-    },
-    "require-dev": {
+        "php": "^7.4 || ^8.0",
         "knplabs/knp-menu-bundle": "^3.0",
         "symfony/twig-bundle": "^3.4 | ^4.0 | ^5.0",
-        "symfony/framework-bundle": "^3.4 | ^4.4 | ^5.0",
+        "symfony/framework-bundle": "^3.4 | ^4.4 | ^5.0"
+    },
+    "require-dev": {
         "symfony/console": "^3.4 | ^4.4 | ^5.0"
     },
     "autoload": {
