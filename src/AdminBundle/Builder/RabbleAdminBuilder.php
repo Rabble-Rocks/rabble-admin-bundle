@@ -21,6 +21,11 @@ class RabbleAdminBuilder implements AdminBuilderInterface
     {
         $application = new Application($this->kernel);
         $application->setAutoExit(false);
+        $output->writeln('Dumping bundles.json file...');
+        $application->run(new ArrayInput([
+            'command' => 'rabble:admin:dump-bundles',
+            '--env' => $input->getOption('env'),
+        ]), $output);
 
         $output->writeln('Creating database...');
         $application->run(new ArrayInput([

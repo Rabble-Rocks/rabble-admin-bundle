@@ -5,7 +5,7 @@
         <ul class="nav nav-tabs" id="{{ name }}-tabs" role="tablist">
             {% for tab in tabs %}
                 <li class="nav-item">
-                    <a class="nav-link{% if loop.first %} active{% endif %}" id="{{ name }}-tab{{ loop.index }}" data-toggle="tab" href="#{{ name }}-tab-content-{{ loop.index }}">{{ tab.label }}</a>
+                    <button type="button" class="nav-link{% if loop.first %} active{% endif %}" id="{{ name }}-tab{{ loop.index }}" data-bs-toggle="tab" data-bs-target="#{{ name }}-tab-content-{{ loop.index }}">{{ tab.label }}</button>
                 </li>
             {% endfor %}
         </ul>

@@ -8,5 +8,9 @@
             <argument type="service" id="rabble_admin.admin_builders" />
             <tag name="console.command"/>
         </service>
+        <service id="rabble_admin.command.dump_bundles" class="Rabble\AdminBundle\Command\DumpBundlesCommand">
+            <argument type="service" id="kernel" />
+            <tag name="console.command"/>
+        </service>
     </services>
 </container>

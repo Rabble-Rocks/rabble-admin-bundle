@@ -15,8 +15,8 @@
             </title>
             {% include '@RabbleAdmin/Layout/loader.html.twig' %}
             {% block css %}
-                <link href="{{ asset('admin/build/style.css') }}" rel="stylesheet">
                 <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+                <link href="{{ asset('admin/build/style.css') }}" rel="stylesheet">
             {% endblock %}
         {% endblock %}
     </head>
@@ -106,7 +106,7 @@
     {% endblock %}
     </html>
     {% block js %}
-        <script type="text/javascript" src="{{ asset('admin/build/vendor.js') }}"></script>
         <script type="text/javascript" src="{{ asset('admin/build/bundle.js') }}"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     {% endblock %}
 {% endblock %}

@@ -59,7 +59,7 @@ class RabbleAdminExtension extends Extension implements PrependExtensionInterfac
     private function prependTwig(ContainerBuilder $container)
     {
         $container->prependExtensionConfig('twig', [
-            'form_themes' => ['bootstrap_4_layout.html.twig'],
+            'form_themes' => ['bootstrap_5_layout.html.twig'],
         ]);
     }
 }

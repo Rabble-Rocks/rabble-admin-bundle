@@ -1,7 +1,7 @@
 {%- set contentLocaleKey = constant('Rabble\\AdminBundle\\EventListener\\RouterContextSubscriber::CONTENT_LOCALE_KEY') -%}
 {%- set current_locale = app.request.attributes.get(contentLocaleKey) -%}
 <li class="dropdown">
-    <a href="#" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown" aria-expanded="true">
+    <a href="#" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-bs-toggle="dropdown" aria-expanded="true">
         <div class="peer"><span class="fsz-sm c-grey-900">{{ current_locale }} <i class="ti-angle-down fsz-xs"></i></span></div>
     </a>
     <ul class="dropdown-menu fsz-sm">
