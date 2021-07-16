@@ -31,6 +31,11 @@ const AutoComplete = (props) => {
             setState({id: selected[0].id});
         }
     };
+    const handleInputChange = (text) => {
+        if ('' === text) {
+            setState({id: ''});
+        }
+    };
     const filterBy = () => true;
 
     return (
@@ -50,6 +55,7 @@ const AutoComplete = (props) => {
                 minLength={2}
                 onSearch={handleSearch}
                 onChange={handleChange}
+                onInputChange={handleInputChange}
                 defaultInputValue={props.currentText ? props.currentText : ''}
                 options={options}
                 placeholder="Search..."
