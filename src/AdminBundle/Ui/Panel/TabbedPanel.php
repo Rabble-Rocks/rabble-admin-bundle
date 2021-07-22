@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TabbedPanel extends AbstractUiComponent
 {
-    protected static $template = '@RabbleAdmin/Ui/Panel/tabbedPanel.html.twig';
+    protected static string $template = '@RabbleAdmin/Ui/Panel/tabbedPanel.html.twig';
 
     public function getTabs(): array
     {

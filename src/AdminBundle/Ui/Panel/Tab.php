@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Tab extends AbstractUiComponent
 {
-    protected static $template = '@RabbleAdmin/Ui/Panel/tab.html.twig';
+    protected static string $template = '@RabbleAdmin/Ui/Panel/tab.html.twig';
 
     public function getLabel(): string
     {

@@ -1,0 +1,23 @@
+{%- set classes = attributes.class|default -%}
+{%- set attributes = attributes|filter((value, key) => key is not same as('class')) -%}
+{%- set classes = classes ~ ' col-' ~ defaultWidth -%}
+{%- if extraLargeWidth is not null -%}
+    {%- set classes = classes ~ ' col-xl-' ~ extraLargeWidth -%}
+{%- endif -%}
+{%- if largeWidth is not null -%}
+    {%- set classes = classes ~ ' col-lg-' ~ largeWidth -%}
+{%- endif -%}
+{%- if mediumWidth is not null -%}
+    {%- set classes = classes ~ ' col-md-' ~ mediumWidth -%}
+{%- endif -%}
+{%- if smallWidth is not null -%}
+    {%- set classes = classes ~ ' col-sm-' ~ smallWidth -%}
+{%- endif -%}
+
+{%- set attributesString = '' -%}
+{%- for key, value in attributes -%}
+    {%- set attributesString = attributesString ~ ' ' ~ key ~ '="' ~ value ~ '"' -%}
+{%- endfor -%}
+<div class="{{ classes|trim }}"{{ attributesString }}>
+    {% if is_string %}{{ content|raw }}{% else %}{{ rabble_admin_ui(content) }}{% endif %}
+</div>

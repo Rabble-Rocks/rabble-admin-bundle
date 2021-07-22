@@ -7,13 +7,12 @@ use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
-use Webmozart\Assert\Assert;
 
 abstract class AbstractUiComponent implements UiInterface
 {
-    protected $options;
-    protected static $template;
-    protected $templateParams;
+    protected array $options;
+    protected static string $template;
+    protected array $templateParams;
 
     public function __construct(array $options = [])
     {
@@ -31,11 +30,10 @@ abstract class AbstractUiComponent implements UiInterface
     public function render(Environment $twig): string
     {
         $templateParams = $this->options;
-        if (is_array($this->templateParams)) {
+        if (isset($this->templateParams)) {
             $templateParams = $this->templateParams;
         }
         $template = $this->options['template'] ?? static::$template;
-        Assert::notNull($template, 'Expected UI component to have a template property or option that is not null.');
 
         return $twig->render($template, $templateParams);
     }
@@ -44,7 +42,7 @@ abstract class AbstractUiComponent implements UiInterface
     {
     }
 
-    private function configureLocalOptions(OptionsResolver $resolver): void
+    final protected function configureLocalOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('template', null);
         $resolver->setAllowedTypes('template', ['null', 'string']);

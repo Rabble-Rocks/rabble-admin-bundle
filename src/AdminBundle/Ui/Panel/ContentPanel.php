@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContentPanel extends AbstractUiComponent
 {
-    protected static $template = '@RabbleAdmin/Ui/Panel/contentPanel.html.twig';
+    protected static string $template = '@RabbleAdmin/Ui/Panel/contentPanel.html.twig';
 
     public function getAttributes(): array
     {

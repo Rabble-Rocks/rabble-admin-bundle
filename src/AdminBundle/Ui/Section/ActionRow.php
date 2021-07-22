@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ActionRow extends AbstractUiComponent
 {
-    protected static $template = '@RabbleAdmin/Ui/Section/actionRow.html.twig';
+    protected static string $template = '@RabbleAdmin/Ui/Section/actionRow.html.twig';
 
     public function getItems(): array
     {

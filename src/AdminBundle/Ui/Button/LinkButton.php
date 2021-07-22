@@ -7,7 +7,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LinkButton extends AbstractUiComponent
 {
-    protected static $template = '@RabbleAdmin/Ui/Button/linkButton.html.twig';
+    protected static string $template = '@RabbleAdmin/Ui/Button/linkButton.html.twig';
 
     public function getAttributes(): array
     {

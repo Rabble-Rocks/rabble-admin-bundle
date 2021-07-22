@@ -1,0 +1,11 @@
+{%- set classes = 'row ' ~ attributes.class|default -%}
+{%- set attributes = attributes|filter((value, key) => key is not same as('class')) -%}
+{%- set attributesString = '' -%}
+{%- for key, value in attributes -%}
+    {%- set attributesString = attributesString ~ ' ' ~ key ~ '="' ~ value ~ '"' -%}
+{%- endfor -%}
+<div class="{{ classes|trim }}"{{ attributesString }}>
+    {% for column in columns %}
+        {{ rabble_admin_ui(column) }}
+    {% endfor %}
+</div>
