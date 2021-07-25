@@ -34,6 +34,7 @@ class GridRow extends AbstractUiComponent
                 Assert::string($name);
                 Assert::isInstanceOf($column, GridColumn::class);
             }
+
             return $columns;
         });
     }

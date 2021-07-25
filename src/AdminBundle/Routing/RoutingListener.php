@@ -8,6 +8,9 @@ class RoutingListener
 {
     public function onRoutingLoad(RoutingEvent $event)
     {
-        $event->addResources('xml', ['@RabbleAdminBundle/Resources/config/routing.xml']);
+        $event->addResources('xml', [
+            '@RabbleAdminBundle/Resources/config/routing.xml',
+            '@FOSJsRoutingBundle/Resources/config/routing/routing.xml',
+        ]);
     }
 }
