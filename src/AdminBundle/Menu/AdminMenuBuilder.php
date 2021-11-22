@@ -31,7 +31,7 @@ class AdminMenuBuilder
             new ConfigureMenuEvent(
                 $menu = $this->factory->createItem('root', [
                     'childrenAttributes' => [
-                        'class' => 'sidebar-menu scrollable pos-r mT-30',
+                        'class' => 'sidebar-menu scrollable pos-r pT-30',
                     ],
                 ]),
                 $this->factory,
