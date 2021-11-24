@@ -58,7 +58,7 @@ const AutoComplete = (props) => {
                 onInputChange={handleInputChange}
                 defaultInputValue={props.currentText ? props.currentText : ''}
                 options={options}
-                placeholder="Search..."
+                placeholder={props.placeholder ? props.placeholder : 'Search...'}
                 renderMenuItemChildren={(option, props) => (
                     <Fragment>
                         <span>{option.text}</span>
@@ -77,7 +77,8 @@ export default (function () {
             let element = document.createElement('div');
             item.insertAdjacentElement('afterend', element);
             ReactDOM.render((
-                <AutoComplete name={item.name} resolver={item.dataset.resolver} currentId={item.value} id={item.id}
+                <AutoComplete name={item.name} placeholder={item.dataset.placeholder}
+                              resolver={item.dataset.resolver} currentId={item.value} id={item.id}
                               currentText={item.dataset.currentText}/>
             ), element);
             item.remove();
