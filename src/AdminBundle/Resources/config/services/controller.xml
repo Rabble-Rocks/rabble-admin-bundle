@@ -9,14 +9,14 @@
         <parameter key="rabble_admin.controller.search.class">Rabble\AdminBundle\Controller\SearchController</parameter>
     </parameters>
     <services>
-        <service id="rabble_admin.controller.auth" class="%rabble_admin.controller.auth.class%" autowire="true">
+        <service id="rabble_admin.controller.auth" class="%rabble_admin.controller.auth.class%" autowire="true" autoconfigure="true">
             <argument type="service" id="security.firewall.map" />
             <tag name="controller.service_arguments"/>
         </service>
-        <service id="rabble_admin.controller.dashboard" class="%rabble_admin.controller.dashboard.class%" autowire="true">
+        <service id="rabble_admin.controller.dashboard" class="%rabble_admin.controller.dashboard.class%" autowire="true" autoconfigure="true">
             <tag name="controller.service_arguments"/>
         </service>
-        <service id="rabble_admin.controller.search" class="%rabble_admin.controller.search.class%" autowire="true">
+        <service id="rabble_admin.controller.search" class="%rabble_admin.controller.search.class%" autowire="true" autoconfigure="true">
             <argument type="service" id="rabble_admin.search.search_manager" />
             <tag name="controller.service_arguments"/>
         </service>

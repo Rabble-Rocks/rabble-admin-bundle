@@ -20,7 +20,7 @@ class AuthController extends AbstractController
 
     public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
-        if ($this->getUser() instanceof UserInterface && in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
+        if ($this->getUser() instanceof UserInterface && in_array('ROLE_RABBLE_ADMIN', $this->getUser()->getRoles())) {
             return $this->redirectToRoute('rabble_admin_dashboard');
         }
         $firewall = $this->firewallMap->getFirewallConfig($request);
@@ -30,7 +30,7 @@ class AuthController extends AbstractController
         return $this->render('@RabbleAdmin/Auth/login.html.twig', [
             'error' => $error,
             'lastUsername' => $lastUsername,
-            'rememberMe' => $firewall instanceof FirewallConfig && in_array('remember_me', $firewall->getListeners(), true),
+            'rememberMe' => $firewall instanceof FirewallConfig && in_array('remember_me', $firewall->getAuthenticators(), true),
         ]);
     }
 }

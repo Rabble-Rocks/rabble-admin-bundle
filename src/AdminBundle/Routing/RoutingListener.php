@@ -10,7 +10,7 @@ class RoutingListener
     {
         $event->addResources('xml', [
             '@RabbleAdminBundle/Resources/config/routing.xml',
-            '@FOSJsRoutingBundle/Resources/config/routing/routing.xml',
+            '@FOSJsRoutingBundle/Resources/config/routing/routing-sf4.xml',
         ]);
     }
 }
